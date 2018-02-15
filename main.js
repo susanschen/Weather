@@ -1,16 +1,22 @@
-// var api = "https://fcc-weather-api.glitch.me/api/current?";
+/*
+This is a project based on
+https://codepen.io/freeCodeCamp/pen/bELRjV?editors=1010
+
+Use Yahoo Weather API to get weather forecast,
+Use Google Maps API to get location name for latitude and longitude,
+Use Weather Icons to display icons for the weather.
+
+*/
 
 var lat, lon, tempUnit = "F", temp, celsiusTemp;
 
 $( document ).ready(function(){
+
   if (navigator.geolocation) {
 		console.log("Geolocation supported");
     navigator.geolocation.getCurrentPosition(function (position) {
-      //var lat = "lat=" + position.coords.latitude;
-      //var lon = "\nlon=" + position.coords.longitude;
 			var lat = position.coords.latitude,
 					lon = position.coords.longitude;
-
 			console.log(lat + "\n" + lon);
 			getCityWeather(lat, lon);
     });
@@ -21,8 +27,8 @@ $( document ).ready(function(){
 
 /*
 Temperature Conversion Formula
-T(°F) = T(°C) × 9/5 + 32
-T(°C) = (T(°F) - 32) × 5/9
+	T(°F) = T(°C) × 9/5 + 32
+	T(°C) = (T(°F) - 32) × 5/9
 */
   $("#convert-unit").click(function () {
     // var currentUnit = $("#unit").class();
@@ -45,6 +51,7 @@ T(°C) = (T(°F) - 32) × 5/9
 
 })  // document.ready
 
+// Get location name from latitude and longitude using Google Maps API
 function getCityWeather(lat, lon) {
 	var googleKey = 'AIzaSyDCQ5SQdPh5YXk89l4so-scoq-dd9swuUM';
 	var googleApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key=' + googleKey;
@@ -52,10 +59,8 @@ function getCityWeather(lat, lon) {
   $.ajax({
     url: googleApi,
 			success: function (ajaxData) {
-				console.log("google success");
-				// console.log(ajaxData);
+				console.log("Received data from Google.");
 				var location = ajaxData.results[4].formatted_address;
-				// console.log(location);
 				getWeather(location);
 			},
 			error: function() {
@@ -64,14 +69,11 @@ function getCityWeather(lat, lon) {
 		}); // end google ajax
 }
 
+// Get weather forecast from Yahoo API
 function getWeather(location) {
-  // var urlString = api + lat + "&" + lon;
-
-	// yahoo api
 	var yql = 'select item from weather.forecast where woeid in (select woeid from geo.places(1) where text="'+location+'")';
 	var yahooApi = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' + yql;
-	// -------
-	console.log("Calling yahoo with..." + location);
+
   $.ajax({
     url: yahooApi,
 			success: function (ajaxData) {
@@ -82,16 +84,12 @@ function getWeather(location) {
 				var weekForecast = data.forecast.slice(0,7);
 				weekForecast.map(fillForecast);
 
-	      // $("#city").text(ajaxData.name + ", ");
-	      // $("#country").text(ajaxData.sys.country);
 				//$("#city").text(channel.location.city + ", ");
 				//$("#country").text(channel.location.country);
+				
 	      // celsiusTemp = Math.round(ajaxData.main.temp * 10) / 10;
 	      // $("#temp").text(celsiusTemp + " " + String.fromCharCode(176));
 	      // $("#convert-unit").text(tempUnit);
-	      // $("#desc").text(ajaxData.weather[0].main);
-	      // getIcon(ajaxData.weather[0].main);
-				//$("#link-source").attr(channel.item.link);
 	    },
 			error: function(xhr, status, msg) {
 				console.log("Error connecting to Yahoo: " + status + " " + msg);
