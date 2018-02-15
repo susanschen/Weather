@@ -1,6 +1,6 @@
 // var api = "https://fcc-weather-api.glitch.me/api/current?";
 
-var lat, lon, tempUnit = 'C', temp, celsiusTemp;
+var lat, lon, tempUnit = "F", temp, celsiusTemp;
 
 $( document ).ready(function(){
   if (navigator.geolocation) {
@@ -18,6 +18,12 @@ $( document ).ready(function(){
     console.log("Geolocation is not supported by this browser.");
   }
 
+
+/*
+Temperature Conversion Formula
+T(°F) = T(°C) × 9/5 + 32
+T(°C) = (T(°F) - 32) × 5/9
+*/
   $("#convert-unit").click(function () {
     // var currentUnit = $("#unit").class();
     // var newTempUnit = currentUnit == "C" ? "F" : "C";
@@ -30,10 +36,10 @@ $( document ).ready(function(){
     // }
 
 		if ($("#unit").hasClass("fah")) {
-			$("#unit").removeClass("fah").addClass("cel");
+			$("#unit").removeClass("fah").addClass("cel").text("Fahrenheit");
 
 		} else {
-			$("#unit").removeClass("cel").addClass("fah");
+			$("#unit").removeClass("cel").addClass("fah").text("Celsius");
 		}
   });
 
@@ -138,6 +144,6 @@ function getIcon(code) {
     case "35": return "wi wi-rain-mix"
     case "36": return "wi wi-hot"
     case "37": case "38": case "39": case "45": case "47": return "wi wi-day-storm-showers"
-    default: return "wi wi-stars"
+    default: return "wi wi-na"
   }
 }
