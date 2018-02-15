@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Local 7-Day Weather Forecast</title>
+
+  <!-- BOOTSTRAP, WEATHER ICON, JQUERY -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/minty/bootstrap.min.css" rel="stylesheet" integrity="sha384-JhIgJbGaBmwiP1/6gN1Li6rs5arXlyM7vZ2Ehu3Pg6ySt73jpv+d6IKesRmwDhaa" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/1.3.2/css/weather-icons.min.css" rel="stylesheet">
+	<link href="mine.css" rel="stylesheet">
+
+	<script
+	src="http://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+	<script src="main.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<header class="col-xs-12 text-center">
+				<h1><a id="link-source" target="_blank">7 Day  Weather Forecast</a></h1>
+				<h2><span id="city"></span>
+					 <span id="country"></span></h2>
+			</header>
+		</div>
+
+		<div class="row">
+			<div class="panel panel-default">
+			  <div class="panel-heading">Panel heading</div>
+
+			  <div class="table-responsive">
+			  	<table class="table">
+						<thead>
+							<tr id="dayoftheweek"></tr>
+						</thead>
+							<tr id="date"></tr>
+							<tr id="hightemp"></tr>
+							<tr id="lowtemp"></tr>
+							<tr id="description"></tr>
+							<tr id="icon"></tr>
+				  </table>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<button id="convert-unit">Convert to <span id="unit" class="unit fah">Celsius</span></button>
+		</div>
+
+		<footer id="attribution">
+			<a href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple_retina.png" width="134" height="29"/></a>
+
+			Icon fonts by
+			<a href="https://github.com/erikflowers/weather-icons/tree/master/font" target="_blank">Weather-Icons</a>
+		</footer>
+	</div> <!-- container -->
+</body>
+</html>
