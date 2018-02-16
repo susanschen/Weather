@@ -13,7 +13,6 @@ var lat, lon, tempUnit = "F", temp, celsiusTemp;
 $( document ).ready(function(){
 
   if (navigator.geolocation) {
-		console.log("Geolocation supported");
     navigator.geolocation.getCurrentPosition(function (position) {
 			var lat = position.coords.latitude,
 					lon = position.coords.longitude;
@@ -23,7 +22,6 @@ $( document ).ready(function(){
   } else {
     console.log("Geolocation is not supported by this browser.");
   }
-
 
 /*
 Temperature Conversion Formula
@@ -52,6 +50,7 @@ Temperature Conversion Formula
 })  // document.ready
 
 // Get location name from latitude and longitude using Google Maps API
+// Calls Yahoo API after Google API success.
 function getCityWeather(lat, lon) {
 	var googleKey = 'AIzaSyDCQ5SQdPh5YXk89l4so-scoq-dd9swuUM';
 	var googleApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key=' + googleKey;
@@ -59,8 +58,8 @@ function getCityWeather(lat, lon) {
   $.ajax({
     url: googleApi,
 			success: function (ajaxData) {
-				console.log("Received data from Google.");
 				var location = ajaxData.results[4].formatted_address;
+				$("#location").text(location);
 				getWeather(location);
 			},
 			error: function() {
@@ -79,14 +78,15 @@ function getWeather(location) {
 			success: function (ajaxData) {
 				var data = ajaxData.query.results.channel.item;
 				console.log(data);
-				// console.log(data.condition.temp); // current temp
-				// console.log(channel.item.description);
+
+				var todayWeather = data.condition;
+				$("#curr-date").text(todayWeather.date);
+				$("#curr-temp").text(todayWeather.temp).append(getIconHtml(getIcon(tempUnit)));
+				$("#curr-icon").append(getIconHtml(getIcon(todayWeather.code)));
+				$("#curr-desc").text(todayWeather.text);
 				var weekForecast = data.forecast.slice(0,7);
 				weekForecast.map(fillForecast);
 
-				//$("#city").text(channel.location.city + ", ");
-				//$("#country").text(channel.location.country);
-				
 	      // celsiusTemp = Math.round(ajaxData.main.temp * 10) / 10;
 	      // $("#temp").text(celsiusTemp + " " + String.fromCharCode(176));
 	      // $("#convert-unit").text(tempUnit);
@@ -100,7 +100,7 @@ function getWeather(location) {
 function fillForecast(day) {
 	var date = day.date.substring(0,6),
 			icon = getIcon(day.code),
-			iconString = "<td><i class='" + icon + "' title='" + day.text + "'></i></td>",
+			iconString = "<td>" + getIconHtml(icon) + "</td>",
 			iconHtml = $.parseHTML(iconString);
 
 	$("#dayoftheweek").append($('<th />', {text: day.day}));
@@ -109,6 +109,11 @@ function fillForecast(day) {
 	$("#lowtemp").append($('<td />', {text: day.low}));
 	$("#description").append($('<td />', {text: day.text}));
 	$("#icon").append(iconHtml);
+}
+
+// Pass in a class name for an icon to get it wrapped in HTML
+function getIconHtml(name) {
+	return "<i class='" + name + "'></i>";
 }
 
 /*
@@ -142,6 +147,9 @@ function getIcon(code) {
     case "35": return "wi wi-rain-mix"
     case "36": return "wi wi-hot"
     case "37": case "38": case "39": case "45": case "47": return "wi wi-day-storm-showers"
+		case "F" : return "wi wi-fahrenheit"
+		case "C" : return "wi wi-celsius"
+		case "degree" : return "wi wi-degrees"
     default: return "wi wi-na"
   }
 }

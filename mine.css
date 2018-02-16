@@ -1,3 +1,30 @@
+.container {
+	margin: 1rem;
+	background-color: #eee;
+}
+
+#location {
+	font-size: 1.5rem;
+}
+
+#curr-temp {
+	font-size: 4rem;
+}
+#curr-temp .wi {
+	font-size: 4rem;
+}
+#curr-icon .wi {
+	font-size: 5rem;
+}
+
+/* #today {
+	background-color: red;
+}
+
+#week {
+	background-color: blue;
+} */
+
 #convert-unit {
 	margin-bottom: 2rem;
 }
