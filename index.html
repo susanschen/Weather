@@ -19,15 +19,15 @@
 
 <body>
 	<div class="container">
-		<div class="row header text-center">
+		<div class="row header">
 			<header class="col-xs-12">
 				<h1><a id="link-source" target="_blank">Weather Forecast</a></h1>
 				<p><span id="location"></span></p>
 			</header>
     </div>
 
-    <div id="today" class="row text-center">
-      <div class="panel panel-default">
+    <div class="row">
+      <div id="today" class="panel panel-default">
         <span id="curr-date" class="panel-heading "></span>
         <span id="curr-temp"></span>
         <span id="curr-high"></span>
@@ -37,27 +37,18 @@
       </div>
     </div>
 
-    <div id="week" class="row text-center">
+    <div class="row">
       <div class="panel panel-default">
-        <div class="panel-heading"></div>
-
         <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr id="dayoftheweek"></tr>
-            </thead>
-              <tr id="date"></tr>
-              <tr id="hightemp"></tr>
-              <tr id="lowtemp"></tr>
-              <tr id="description"></tr>
-              <tr id="icon"></tr>
+          <table id="week" class="table">
+            <!-- data to be filled by javascript -->
           </table>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <button id="convert-unit" class="btn btn-default">Convert to <span id="unit" class="unit fah">Celsius</span></button>
+      <button id="convert-unit" class="btn btn-info">Convert to <span id="unit" class="unit fah">Celsius</span></button>
     </div>
 
     <footer id="attribution">

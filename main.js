@@ -97,18 +97,19 @@ function getWeather(location) {
   }); // end yahoo ajax
 }
 
-function fillForecast(day) {
+function fillForecast(day, index) {
 	var date = day.date.substring(0,6),
 			icon = getIcon(day.code),
-			iconString = "<td>" + getIconHtml(icon) + "</td>",
-			iconHtml = $.parseHTML(iconString);
+			iconHtml = $.parseHTML(getIconHtml(icon));
 
-	$("#dayoftheweek").append($('<th />', {text: day.day}));
-	$("#date").append($('<td />', {text: date}));
-	$("#hightemp").append($('<td />', {text: day.high}));
-	$("#lowtemp").append($('<td />', {text: day.low}));
-	$("#description").append($('<td />', {text: day.text}));
-	$("#icon").append(iconHtml);
+	$("<tr><td></td></tr>")
+	.append($("<span />", {class: "dayoftheweek", text:day.day}))
+	.append($("<span />", {class: "date", text:date}))
+	.append($("<span />", {class: "hightemp", text:day.high}))
+	.append($("<span />", {class: "lowtemp", text:day.low}))
+	.append($("<span />", {class: "description", text:day.text}))
+	.append(iconHtml)
+	.appendTo("#week");
 }
 
 // Pass in a class name for an icon to get it wrapped in HTML
