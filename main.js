@@ -99,17 +99,30 @@ function getWeather(location) {
 
 function fillForecast(day, index) {
 	var date = day.date.substring(0,6),
-			icon = getIcon(day.code),
-			iconHtml = $.parseHTML(getIconHtml(icon));
+			icon = getIcon(day.code);
+			//iconHtml = $.parseHTML(getIconHtml(icon));
 
-	$("<tr><td></td></tr>")
-	.append($("<span />", {class: "dayoftheweek", text:day.day}))
-	.append($("<span />", {class: "date", text:date}))
-	.append($("<span />", {class: "hightemp", text:day.high}))
-	.append($("<span />", {class: "lowtemp", text:day.low}))
-	.append($("<span />", {class: "description", text:day.text}))
-	.append(iconHtml)
+	$("<tr />")
+	.attr("id", "index-"+index)
 	.appendTo("#week");
+
+	$("<td />")
+	.append($("<span />", {class: "dayoftheweek", text:day.day}))
+	.append("<br />")
+	.append($("<span />", {class: "date", text:date}))
+	.appendTo("#index-"+index);
+
+	$("<td />")
+	.append($("<span />", {class: "temp-high", html: day.high + "&deg;"}))
+	.append("<br />")
+	.append($("<span />", {class: "temp-low", html: day.low + "&deg;"}))
+	.appendTo("#index-"+index);
+
+	$("<td />")
+	.append(getIconHtml(icon))
+	.append("<br />")
+	.append($("<span />", {class: "description", text:day.text}))
+	.appendTo("#index-"+index);
 }
 
 // Pass in a class name for an icon to get it wrapped in HTML

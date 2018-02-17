@@ -1,6 +1,6 @@
 .container {
 	margin: 1rem;
-	/* background-color: #eee; */
+	border: 1px solid green;
 }
 
 #location {
@@ -17,18 +17,23 @@
 	font-size: 5rem;
 }
 
-/* #today {
-	background-color: red;
+#index {
+	margin: 1rem auto;
+	border-bottom: 1px solid #aaa;
 }
 
-#week {
-	background-color: blue;
-} */
+#week .temp-high {
+	padding-right: 5px;
+	font-weight: bold;
+}
+
+#week span {
+	padding-right: 10px;
+}
+#week .wi {
+	font-size: 2rem;
+}
 
 #convert-unit {
 	margin-bottom: 2rem;
-}
-
-.wi {
-	font-size: 3rem;
 }
