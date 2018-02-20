@@ -19,21 +19,32 @@
 
 <body>
 	<div class="container">
-		<div class="row header">
+		<div class="page-header">
 			<header class="col-xs-12">
-				<h1><a id="link-source" target="_blank">Weather Forecast</a></h1>
-				<p><span id="location"></span></p>
+				<h1><a id="link-source" target="_blank">Weather Forecast</a><br />
+          <small><span id="location"></span></small>
+        </h1>
 			</header>
     </div>
 
     <div class="row">
-      <div id="today" class="panel panel-default">
-        <span id="curr-date" class="panel-heading "></span>
-        <span id="curr-temp"></span>
-        <span id="curr-high"></span>
-        <span id="curr-low"></span>
-        <span id="curr-icon"></span>
-        <span id="curr-desc"></span>
+      <div class="panel panel-default">
+        <div class="table-responsive">
+          <table id="today" class="table">
+            <thead>
+              <th><span id="curr-date"></span></th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span id="curr-temp"></span></td>
+                <td><span id="curr-icon"></span></td>
+              </tr>
+              <tr>
+                <td><span id="curr-desc"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 

@@ -84,6 +84,8 @@ function getWeather(location) {
 				$("#curr-temp").text(todayWeather.temp).append(getIconHtml(getIcon(tempUnit)));
 				$("#curr-icon").append(getIconHtml(getIcon(todayWeather.code)));
 				$("#curr-desc").text(todayWeather.text);
+
+				// Display the first 7 days forecast
 				var weekForecast = data.forecast.slice(0,7);
 				weekForecast.map(fillForecast);
 
@@ -97,6 +99,7 @@ function getWeather(location) {
   }); // end yahoo ajax
 }
 
+// Build the DOM for the week forecast
 function fillForecast(day, index) {
 	var date = day.date.substring(0,6),
 			icon = getIcon(day.code);
