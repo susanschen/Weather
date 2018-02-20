@@ -103,28 +103,42 @@ function getWeather(location) {
 function fillForecast(day, index) {
 	var date = day.date.substring(0,6),
 			icon = getIcon(day.code);
-			//iconHtml = $.parseHTML(getIconHtml(icon));
 
-	$("<tr />")
+  // create the row
+	$("<div />")
 	.attr("id", "index-"+index)
+	.attr("class", "row-forecast")
 	.appendTo("#week");
 
-	$("<td />")
-	.append($("<span />", {class: "dayoftheweek", text:day.day}))
-	.append("<br />")
-	.append($("<span />", {class: "date", text:date}))
+  // Add the row's data
+	$("<div />")
+	.attr("class", "dayoftheweek")
+	.html(day.day + ", " + date)
 	.appendTo("#index-"+index);
 
-	$("<td />")
-	.append($("<span />", {class: "temp-high", html: day.high + "&deg;"}))
-	.append("<br />")
-	.append($("<span />", {class: "temp-low", html: day.low + "&deg;"}))
+	$("<div />")
+	.attr("class", "icon")
+	.html(getIconHtml(icon))
 	.appendTo("#index-"+index);
 
-	$("<td />")
-	.append(getIconHtml(icon))
-	.append("<br />")
-	.append($("<span />", {class: "description", text:day.text}))
+	$("<div />")
+	.attr("class", "temp-high")
+	.html(day.high + "&deg;")
+	.appendTo("#index-"+index);
+
+	// $("<div />")
+	// .attr("class", "date")
+	// .text(date)
+	// .appendTo("#index-"+index);
+
+	$("<div />")
+	.attr("class", "description")
+	.html(day.text)
+	.appendTo("#index-"+index);
+
+	$("<div />")
+	.attr("class", "temp-low")
+	.html(day.low + "&deg;")
 	.appendTo("#index-"+index);
 }
 
