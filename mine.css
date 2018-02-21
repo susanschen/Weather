@@ -1,6 +1,6 @@
 .container {
-	margin: 1rem;
-	border: 1px solid green;
+	margin: 1rem auto;
+	width: 500px;
 }
 
 #curr-temp {
@@ -17,23 +17,32 @@
 .wrapper {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-auto-rows: 100px;
 }
 
 #week .row-forecast {
 	display: grid;
 	grid-template-columns: 2fr 1fr 1fr;
 	border-bottom: 1px solid #ddd;
+	padding: 1.5rem;
+}
+
+#week .dayoftheweek,
+#week .description {
+	padding-left: 3rem;
 }
 
 #week .dayoftheweek {
-	padding-left: 2rem;
+	font-weight: bold;
+}
+
+#week .description {
+	font-style: italic;
 }
 
 #week .icon {
 	grid-column: 2;
 	grid-row: 1 / 3;
-	padding-top: 1rem;
+	padding-top: .5rem;
 	text-align: center;
 }
 
