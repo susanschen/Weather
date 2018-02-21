@@ -20,11 +20,14 @@
 
 #curr-date {
 	grid-column: 1 / 3;
-	font-size: 1.1rem;
+	font-size: 1.2rem;
 }
 
 #curr-temp {
+	grid-row: 2 / 4;
 	font-size: 4rem;
+	vertical-align: middle;
+	padding-top: .8rem;
 }
 
 #curr-temp .wi {
@@ -38,7 +41,7 @@
 
 #curr-desc {
 	grid-column-start: 2;
-	font-weight: bold;
+	font-size: 1.2rem;
 }
 
 /* Week Forecast  */
@@ -71,6 +74,7 @@
 	grid-column: 2;
 	grid-row: 1 / 3;
 	padding-top: .5rem;
+	color: #6CC3D5;
 }
 
 #week .temp-high {
