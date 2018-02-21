@@ -1,20 +1,48 @@
+* {
+	box-sizing: border-box;
+}
+
 .container {
 	margin: 1rem auto;
 	width: 500px;
+	text-align: center;
+}
+
+/* Today's Forecast  */
+.wrapper-current {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 1.5rem;
+	background-color: #6CC3D5;
+	color: white;
+	border-radius: 5px;
+}
+
+#curr-date {
+	grid-column: 1 / 3;
+	font-size: 1.1rem;
 }
 
 #curr-temp {
 	font-size: 4rem;
 }
+
 #curr-temp .wi {
 	font-size: 4rem;
 }
+
 #curr-icon .wi {
 	font-size: 5rem;
+	padding-top: 1rem;
+}
+
+#curr-desc {
+	grid-column-start: 2;
+	font-weight: bold;
 }
 
 /* Week Forecast  */
-.wrapper {
+.wrapper-week {
 	display: grid;
 	grid-template-columns: 1fr;
 }
@@ -26,10 +54,10 @@
 	padding: 1.5rem;
 }
 
-#week .dayoftheweek,
+/* #week .dayoftheweek,
 #week .description {
-	padding-left: 3rem;
-}
+	padding-left: 1rem;
+} */
 
 #week .dayoftheweek {
 	font-weight: bold;
@@ -43,16 +71,10 @@
 	grid-column: 2;
 	grid-row: 1 / 3;
 	padding-top: .5rem;
-	text-align: center;
 }
 
 #week .temp-high {
 	font-weight: bold;
-	text-align: center;
-}
-
-#week .temp-low {
-	text-align: center;
 }
 
 #week .wi {
@@ -61,5 +83,10 @@
 
 /* Button  */
 #convert-unit {
-	margin-bottom: 2rem;
+	margin: 1rem auto;
+}
+
+/* Attribution */
+#attribution {
+	margin-top: 1.2rem;
 }

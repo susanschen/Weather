@@ -19,36 +19,13 @@
 
 <body>
 	<div class="container">
-		<div class="page-header">
-			<header class="col-xs-12">
+			<header>
 				<h1><a id="link-source" target="_blank">Weather Forecast</a><br />
           <small><span id="location"></span></small>
         </h1>
 			</header>
-    </div>
 
-    <div class="row">
-      <div class="panel panel-default">
-        <div class="table-responsive">
-          <table id="today" class="table">
-            <thead>
-              <th><span id="curr-date"></span></th>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span id="curr-temp"></span></td>
-                <td><span id="curr-icon"></span></td>
-              </tr>
-              <tr>
-                <td><span id="curr-desc"></span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div id="week" class="wrapper">
+    <div id="today" class="wrapper-current">
       <!-- data to be filled by javascript -->
     </div>
 
@@ -56,9 +33,13 @@
       <button id="convert-unit" class="btn btn-info">Convert to <span id="unit" class="unit fah">Celsius</span></button>
     </div>
 
+    <div id="week" class="wrapper-week">
+      <!-- data to be filled by javascript -->
+    </div>
+
     <footer id="attribution">
       <a href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple_retina.png" width="134" height="29"/></a>
-
+      <br />
       Icon fonts by
       <a href="https://github.com/erikflowers/weather-icons/tree/master/font" target="_blank">Weather-Icons</a>
     </footer>

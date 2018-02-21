@@ -77,13 +77,25 @@ function getWeather(location) {
     url: yahooApi,
 			success: function (ajaxData) {
 				var data = ajaxData.query.results.channel.item;
-				console.log(data);
 
+				// Display today's current temperature and weather condition
 				var todayWeather = data.condition;
-				$("#curr-date").text(todayWeather.date);
-				$("#curr-temp").text(todayWeather.temp).append(getIconHtml(getIcon(tempUnit)));
-				$("#curr-icon").append(getIconHtml(getIcon(todayWeather.code)));
-				$("#curr-desc").text(todayWeather.text);
+				$("<div />")
+					.attr("id", "curr-date")
+					.html(todayWeather.date)
+					.appendTo("#today");
+				$("<div />")
+					.attr("id", "curr-temp")
+					.html(todayWeather.temp + getIconHtml(getIcon(tempUnit)))
+					.appendTo("#today");
+				$("<div />")
+					.attr("id", "curr-icon")
+					.html(getIconHtml(getIcon(todayWeather.code)))
+					.appendTo("#today");
+				$("<div />")
+					.attr("id", "curr-desc")
+					.html(todayWeather.text)
+					.appendTo("#today");
 
 				// Display the first 7 days forecast
 				var weekForecast = data.forecast.slice(0,7);
@@ -125,11 +137,6 @@ function fillForecast(day, index) {
 	.attr("class", "temp-high")
 	.html(day.high + "&deg;")
 	.appendTo("#index-"+index);
-
-	// $("<div />")
-	// .attr("class", "date")
-	// .text(date)
-	// .appendTo("#index-"+index);
 
 	$("<div />")
 	.attr("class", "description")
