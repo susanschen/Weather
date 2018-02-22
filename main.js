@@ -80,22 +80,7 @@ function getWeather(location) {
 
 				// Display today's current temperature and weather condition
 				var todayWeather = data.condition;
-				$("<div />")
-					.attr("id", "curr-date")
-					.html(todayWeather.date)
-					.appendTo("#today");
-				$("<div />")
-					.attr("id", "curr-temp")
-					.html(todayWeather.temp + getIconHtml(getIcon(tempUnit)))
-					.appendTo("#today");
-				$("<div />")
-					.attr("id", "curr-icon")
-					.html(getIconHtml(getIcon(todayWeather.code)))
-					.appendTo("#today");
-				$("<div />")
-					.attr("id", "curr-desc")
-					.html(todayWeather.text)
-					.appendTo("#today");
+				fillCurrent(todayWeather);
 
 				// Display the first 7 days forecast
 				var weekForecast = data.forecast.slice(0,7);
@@ -109,6 +94,26 @@ function getWeather(location) {
 				console.log("Error connecting to Yahoo: " + status + " " + msg);
 			}
   }); // end yahoo ajax
+}
+
+// Build the DOM for the current day's forecast
+function fillCurrent(todayWeather) {
+	$("<div />")
+		.attr("id", "curr-date")
+		.html(todayWeather.date)
+		.appendTo("#today");
+	$("<div />")
+		.attr("id", "curr-temp")
+		.html(todayWeather.temp + getIconHtml(getIcon(tempUnit)))
+		.appendTo("#today");
+	$("<div />")
+		.attr("id", "curr-icon")
+		.html(getIconHtml(getIcon(todayWeather.code)))
+		.appendTo("#today");
+	$("<div />")
+		.attr("id", "curr-desc")
+		.html(todayWeather.text)
+		.appendTo("#today");
 }
 
 // Build the DOM for the week forecast
