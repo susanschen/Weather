@@ -117,6 +117,9 @@ function getWeather(location) {
 				// Display the first 7 days forecast
 				var weekForecast = data.forecast.slice(0,7);
 				weekForecast.map(fillForecast);
+
+				// Attribution Link to Yahoo
+				$("#link-source").attr("href", data.link.split("*")[1]);
 	    },
 			error: function(xhr, status, msg) {
 				alert("Error connecting to Yahoo: " + status + " " + msg);
