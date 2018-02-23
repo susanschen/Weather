@@ -8,7 +8,7 @@ Use Weather Icons to display icons for the weather.
 
 */
 
-var lat, lon, tempUnit = "F", temp, celsiusTemp;
+var lat, lon, tempUnit = "F", temp, fahTemp;
 
 $( document ).ready(function(){
 
@@ -16,34 +16,66 @@ $( document ).ready(function(){
     navigator.geolocation.getCurrentPosition(function (position) {
 			var lat = position.coords.latitude,
 					lon = position.coords.longitude;
-			console.log(lat + "\n" + lon);
 			getCityWeather(lat, lon);
     });
   } else {
-    console.log("Geolocation is not supported by this browser.");
+    alert("Geolocation is not supported by this browser.");
   }
 
 /*
 Temperature Conversion Formula
-	T(°F) = T(°C) × 9/5 + 32
 	T(°C) = (T(°F) - 32) × 5/9
 */
-  $("#convert-unit").click(function () {
-    // var currentUnit = $("#unit").class();
-    // var newTempUnit = currentUnit == "C" ? "F" : "C";
-    // $("#convert-unit").text(newTempUnit);
-    // if (newTempUnit == "F") {
-    //   var fahTemp = Math.round(parseInt($("#temp").text()) * 9 / 5 + 32);
-    //   $("#temp").text(fahTemp + " " + String.fromCharCode(176));
-    // } else {
-    //   $("#temp").text(celsiusTemp + " " + String.fromCharCode(176));
-    // }
+function toCelsius(temp) {
+	return Math.round((parseInt(temp) - 32) * 5 / 9);
+}
 
-		if ($("#unit").hasClass("fah")) {
-			$("#unit").removeClass("fah").addClass("cel").text("Fahrenheit");
+/*
+Temperature Conversion Formula
+	T(°F) = T(°C) × 9/5 + 32
+*/
+function toFahrenheit(temp) {
+	return Math.round(parseInt(temp) * 9 / 5 + 32);
+}
 
-		} else {
-			$("#unit").removeClass("cel").addClass("fah").text("Celsius");
+$("#convert-unit").click(function () {
+		var temp = $("#curr-temp").text(),
+				highTemp,
+				lowTemp;
+
+		// Use classes "fah" or "cel", and text "Fahrenheit" or "Celsius"
+		function changeBtn(oldClass, newClass, newText) {
+			$("#unit").removeClass(oldClass).addClass(newClass).text(newText);
+		}
+
+		// Pass in "C" or "F"
+		function changeAllTempTo(newUnit) {
+			tempUnit = newUnit;
+			temp = (tempUnit === "C") ? toCelsius(temp) : toFahrenheit(temp);
+
+			// Convert today's current temperature
+			$("#curr-temp").html(temp + getIconHtml(getIcon(tempUnit)));
+
+			// Convert the week's high and low temperature
+			for (var i=0; i<7; i++) {
+				highTemp = $("#index-" + i + " .temp-high").text();
+				lowTemp = $("#index-" + i + " .temp-low").text();
+
+				highTemp = (tempUnit === "C") ? toCelsius(highTemp) : toFahrenheit(highTemp);
+				lowTemp = (tempUnit === "C") ? toCelsius(lowTemp) : toFahrenheit(lowTemp);
+
+				$("#index-" + i + " .temp-high").html(highTemp + "&deg;");
+				$("#index-" + i + " .temp-low").html(lowTemp + "&deg;");
+			}
+		}
+
+		if (tempUnit === "F") {
+			changeBtn("fah", "cel", "Fahrenheit");
+			changeAllTempTo("C");
+		}
+		else {
+			changeBtn("cel", "fah", "Celsius");
+			changeAllTempTo("F");
 		}
   });
 
@@ -63,7 +95,7 @@ function getCityWeather(lat, lon) {
 				getWeather(location);
 			},
 			error: function() {
-				console.log('Error connecting to Google');
+				alert('Error connecting to Google');
 			}
 		}); // end google ajax
 }
@@ -85,13 +117,9 @@ function getWeather(location) {
 				// Display the first 7 days forecast
 				var weekForecast = data.forecast.slice(0,7);
 				weekForecast.map(fillForecast);
-
-	      // celsiusTemp = Math.round(ajaxData.main.temp * 10) / 10;
-	      // $("#temp").text(celsiusTemp + " " + String.fromCharCode(176));
-	      // $("#convert-unit").text(tempUnit);
 	    },
 			error: function(xhr, status, msg) {
-				console.log("Error connecting to Yahoo: " + status + " " + msg);
+				alert("Error connecting to Yahoo: " + status + " " + msg);
 			}
   }); // end yahoo ajax
 }
