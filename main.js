@@ -120,6 +120,9 @@ function getWeather(location) {
 
 				// Attribution Link to Yahoo
 				$("#link-source").attr("href", data.link.split("*")[1]);
+
+				// Hide loading message
+				$("#message").addClass("hide");
 	    },
 			error: function(xhr, status, msg) {
 				alert("Error connecting to Yahoo: " + status + " " + msg);

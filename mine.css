@@ -94,3 +94,7 @@
 #attribution {
 	margin-top: 1.2rem;
 }
+
+.hide {
+	display: none;
+}
