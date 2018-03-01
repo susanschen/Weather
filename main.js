@@ -85,16 +85,20 @@ $("#convert-unit").click(function () {
 // Calls Yahoo API after Google API success.
 function getCityWeather(lat, lon) {
 
-	var googleApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key='; // key is not required, however there is a daily limit usage
+	var googleApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key='; // key is not required, however there is a limit usage
 
   $.ajax({
     url: googleApi,
 			success: function (ajaxData) {
-				if (ajaxData) {
+				if (ajaxData.hasOwnProperty('error_message')) {
+					console.log(ajaxData);
+					$("#message").text("Please try again later. Usage limit is reached.")
+				} else {
+					console.log(ajaxData);
 					var location = ajaxData.results[4].formatted_address;
 					$("#location").text(location);
 					getWeather(location);
-				} else $("#message").text("Please try again later. Usage limit is reached.")
+				}
 
 			},
 			error: function() {
