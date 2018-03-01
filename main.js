@@ -84,15 +84,18 @@ $("#convert-unit").click(function () {
 // Get location name from latitude and longitude using Google Maps API
 // Calls Yahoo API after Google API success.
 function getCityWeather(lat, lon) {
-	var googleKey = 'AIzaSyDCQ5SQdPh5YXk89l4so-scoq-dd9swuUM';
-	var googleApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key=' + googleKey;
+
+	var googleApi = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key='; // key is not required, however there is a daily limit usage
 
   $.ajax({
     url: googleApi,
 			success: function (ajaxData) {
-				var location = ajaxData.results[4].formatted_address;
-				$("#location").text(location);
-				getWeather(location);
+				if (ajaxData) {
+					var location = ajaxData.results[4].formatted_address;
+					$("#location").text(location);
+					getWeather(location);
+				} else $("#message").text("Please try again later. Usage limit is reached.")
+
 			},
 			error: function() {
 				alert('Error connecting to Google');
